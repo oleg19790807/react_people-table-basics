@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable padding-line-between-statements */
 // components/PeopleTable.tsx
 import { useParams } from 'react-router-dom';
@@ -14,19 +15,23 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people, isLoading, error }) => {
   const { slug } = useParams();
 
-  if (isLoading) return <Loader />;
-  if (error)
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (error) {
     return (
       <p data-cy="peopleLoadingError" className="has-text-danger">
         {error}
       </p>
     );
-  if (!people.length)
+  }
+  if (!people.length) {
     return <p data-cy="noPeopleMessage">There are no people on the server</p>;
-
-  // Helper function to find a person by name and create a link
+  }
   const getPersonLink = (name: string | null) => {
-    if (!name) return '-';
+    if (!name) {
+      return '-';
+    };
     const foundPerson = people.find(p => p.name === name);
     return foundPerson ? <PersonLink person={foundPerson} /> : name;
   };
